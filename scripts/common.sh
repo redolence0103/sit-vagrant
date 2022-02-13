@@ -8,7 +8,7 @@ KUBERNETES_VERSION="1.22.6-00"
 sudo swapoff -a
 # keeps the swaf off during reboot
 # sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
-sed -i '12s/^/#/' /etc/fstab
+sudo sed -i 's/\/swap/#swap/' /etc/fstab
 
 sudo apt-get update -y
 sudo apt-get install -y \
