@@ -1,4 +1,5 @@
 Vagrant.configure("2") do |config|
+    config.vm.box_download_insecure = true
     config.vm.provision "shell", inline: <<-SHELL
         apt-get update -y
         echo "10.0.0.10  master-node" >> /etc/hosts
