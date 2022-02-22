@@ -9,24 +9,29 @@ sudo swapoff -a
 # keeps the swaf off during reboot
 # sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo sed -i 's/\/swap/#swap/' /etc/fstab
-
+#############
+echo quit | openssl s_client -showcerts -servername packages.cloud.google.com -connect www.naver.com:443 > kube.crt
+sed -ni '67,86p' kube.crt
+sudo cp kube.crt /usr/local/share/ca-certificates/kube.crt
+sudo update-ca-certificates
+#############
 # sudo apt-get update -y
 # sudo apt-get install -y \
-#     apt-transport-https \
-#     ca-certificates \
-#     curl \
-#     gnupg \
-#     lsb-release
+     apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg \
+     lsb-release
 
-# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-# echo \
-#   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-#   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 
 sudo apt-get update -y
-# sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 sudo apt install docker.io curl lsg-release -y
 
 # Following configurations are recomended in the kubenetes documentation for Docker runtime. Please refer https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker
