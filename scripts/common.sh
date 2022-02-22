@@ -15,8 +15,8 @@ sed -ni '67,86p' kube.crt
 sudo cp kube.crt /usr/local/share/ca-certificates/kube.crt
 sudo update-ca-certificates
 #############
-# sudo apt-get update -y
-# sudo apt-get install -y \
+sudo apt-get update -y
+sudo apt-get install -y \
      apt-transport-https \
      ca-certificates \
      curl \
